@@ -43,7 +43,7 @@ function VariantOptions(options, allow_backorders) {
     update();
     enable(parent.find('option.option-value'));
     toggle();
-    $('option.clear-option.clear-button').hide().click(handle_clear);
+    $('option.clear-option.clear-button').click(handle_clear);
   }
   
   function get_index(parent) {
@@ -54,7 +54,7 @@ function VariantOptions(options, allow_backorders) {
     index = isNaN(i) ? index : i;
     parent = $(divs.get(index));
     buttons = parent.find('option.option-value');
-    parent.find('option.clear-button').hide();
+//    parent.find('option.clear-button').hide();
   }
   
   function disable(btns) {
@@ -150,9 +150,9 @@ function VariantOptions(options, allow_backorders) {
         return to_f(a) < to_f(b) ? -1 : 1;
       });
       if (prices.length == 1) {
-        $('#product-price .price').html('<span class="price assumed">' + prices[0] + '</span>');  
+        $('#product-price .price').html(prices[0]);  
       } else { 
-        $('#product-price .price').html('<span class="price from">' + prices[0] + '</span> - <span class="price to">' + prices[prices.length - 1] + '</span>');
+        $('#product-price .price').html(prices[0] + ' - ' + prices[prices.length - 1]);
       }
       return false;
     }
@@ -181,8 +181,8 @@ function VariantOptions(options, allow_backorders) {
     enable(buttons.removeClass('selected'));
     toggle();
     parent.nextAll().each(function(index, element) {
-      disable($(element).find('option.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
-      $(element).find('option.clear-button').hide();
+      disable($(element).find('option.option-value').removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
+//      $(element).find('option.clear-button').hide();
     });
     show_all_variant_images();
   }
@@ -203,7 +203,7 @@ function VariantOptions(options, allow_backorders) {
     }
     disable(buttons);
     var a = enable(a.addClass('selected'));
-    parent.find('option.clear-button').css('display', 'block');
+//    parent.find('option.clear-button').css('display', 'block');
     advance();
     if (find_variant()) {
       toggle();
